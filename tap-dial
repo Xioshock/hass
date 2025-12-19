@@ -1,9 +1,7 @@
 blueprint:
-  name: MQTT Button – Lights, Cover & Switch
+  name: Hue Tap Dial Preset
   description: >
-    Control a light, cover and switch using an MQTT button device.
-    Button 1 toggles light, Button 2 toggles cover, Button 3 toggles switch,
-    brightness up/down controls light brightness.
+    Hue Tap Dial Preset
   domain: automation
 
   input:
@@ -15,25 +13,31 @@ blueprint:
           integration: mqtt
 
     light_target:
-      name: Light
+      name: Světlo
       selector:
         entity:
           domain: light
 
-    cover_target:
-      name: Cover
+    button_2_press:
+      name: Button 2
+      default: []
       selector:
-        entity:
-          domain: cover
+        action: {}
 
-    switch_target:
-      name: Switch
+    button_3_press:
+      name: Button 3
+      default: []
       selector:
-        entity:
-          domain: switch
+        action: {}
+
+    button_4_press:
+      name: Button 4
+      default: []
+      selector:
+        action: {}
 
     brightness_step:
-      name: Brightness step (%)
+      name: Procenta tlumení světla (%)
       description: Percentage step for brightness up/down
       default: 15
       selector:
@@ -43,7 +47,7 @@ blueprint:
           unit_of_measurement: "%"
 
     transition_time:
-      name: Light transition time (seconds)
+      name: Přechod světla (sekundy)
       default: 0.5
       selector:
         number:
@@ -114,18 +118,17 @@ action:
       - conditions:
           - condition: trigger
             id: button_2
-        sequence:
-          - service: cover.toggle
-            target:
-              entity_id: !input cover_target
+        sequence: !input button_2_press
 
       - conditions:
           - condition: trigger
             id: button_3
-        sequence:
-          - service: switch.toggle
-            target:
-              entity_id: !input switch_target
+        sequence: !input button_3_press
+
+      - conditions:
+          - condition: trigger
+            id: button_4
+        sequence: !input button_4_press
 
       - conditions:
           - condition: trigger
