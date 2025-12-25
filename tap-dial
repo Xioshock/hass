@@ -138,7 +138,7 @@ action:
             target:
               entity_id: !input light_target
             data:
-              brightness_step_pct: "{{ -1 * (brightness_step | int) }}"
+              brightness_step_pct: -15
               transition: !input transition_time
 
       - conditions:
@@ -149,5 +149,5 @@ action:
             target:
               entity_id: !input light_target
             data:
-              brightness_step_pct: !input brightness_step
+              brightness_step_pct: 15
               transition: !input transition_time
