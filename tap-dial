@@ -71,14 +71,14 @@ trigger:
   - domain: mqtt
     device_id: !input mqtt_device
     type: action
-    subtype: brightness_step_down
+    subtype: button_2_press
     trigger: device
     id: button_2
 
   - domain: mqtt
     device_id: !input mqtt_device
     type: action
-    subtype: brightness_step_down
+    subtype: button_3_press
     trigger: device
     id: button_3
 
